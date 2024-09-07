@@ -1,3 +1,9 @@
+@import "@/shared/styles/index.scss";
+
 .main {
-  
+  @extend %bp-width;
+  @extend %flex-col-start-center;
+  padding: rem(16px) 0 0;
+  gap: 16px;
+  min-height: 100vh;
 }
