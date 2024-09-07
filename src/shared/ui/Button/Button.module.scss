@@ -1,0 +1,41 @@
+@import "@/shared/styles/index.scss";
+
+.button {
+  @extend %flex-row-center-center;
+  height: rem(48px);
+  padding: 0 rem(15px);
+  @include set-font-size(rem(16px), 1.25);
+  color: $white-255;
+  text-wrap: nowrap;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &_kit_default {
+    background-color: $purple-94;
+
+    &:focus {
+      outline: 1px solid $purple-80;
+    }
+
+    &:hover {
+      background-color: $purple-80;
+    }
+  }
+
+  &_kit_warning {
+    background-color: $red-232;
+
+    &:focus {
+      outline: 1px solid $red-193;
+    }
+
+    &:hover {
+      background-color: $red-193;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "@/shared/styles/index.scss";
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 140px;
+  gap: rem(30px);
+  justify-items: start;
+  align-items: end;
+}

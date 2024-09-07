@@ -19,10 +19,14 @@
   padding: 0 rem(45px) 0 rem(24px);
   border: 1px solid $grey-225;
   border-radius: rem(5px);
-  height: rem(56px);
+  height: rem(48px);
   width: 100%;
 
   &::placeholder {
     color: $grey-225;
   }
+}
+
+.error {
+  position: absolute;
 }
