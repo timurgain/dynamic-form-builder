@@ -1,0 +1,53 @@
+@import "@/shared/styles/index.scss";
+
+.checkbox {
+  @extend %flex-row-center-center;
+
+  & input[type="checkbox"] {
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+
+  & label {
+    position: relative;
+    cursor: pointer;
+  }
+
+  & label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    // transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border: 1px solid $grey-181;
+    border-radius: 4px;
+  }
+
+  & input[type="checkbox"]:checked + label:before {
+    border: 1px solid $purple-94;
+    background-color: $purple-94;
+  }
+
+  & input[type="checkbox"]:hover:not(&.checkbox_error) + label:before,
+  & input[type="checkbox"]:focus:not(&.checkbox_error) + label:before {
+    outline: 2px solid $purple-112_50;
+  }
+
+  & input[type="checkbox"]:checked + label:after {
+    content: "✔";
+    @include set-font-size(rem(16px), 1);
+    position: absolute;
+    left: 8px;
+    bottom: 50%;
+    transform: translateY(-40%);
+    color: white;
+  }
+
+  &.checkbox_error > label:before {
+    border: 1px solid $red-193;
+    outline: 2px solid $red-232_50;
+  }
+}
