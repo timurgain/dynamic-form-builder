@@ -1,0 +1,28 @@
+@import "@/shared/styles/index.scss";
+
+.container {
+  position: relative;
+  @extend %flex-col-start-start;
+  gap: rem(5px);
+  width: 100%;
+}
+
+.label {
+  @include set-font-size(rem(16px), 1.25);
+  color: $grey-181;
+}
+
+.input {
+  @include set-font-size(rem(16px), 1.25);
+  @extend %flex-row-center-start;
+  color: $grey-80;
+  padding: 0 rem(45px) 0 rem(24px);
+  border: 1px solid $grey-225;
+  border-radius: rem(5px);
+  height: rem(56px);
+  width: 100%;
+
+  &::placeholder {
+    color: $grey-225;
+  }
+}
