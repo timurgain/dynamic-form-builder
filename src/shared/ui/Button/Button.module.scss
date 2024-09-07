@@ -9,7 +9,7 @@
   text-wrap: nowrap;
   border-radius: 8px;
   border: none;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 
   &:hover {
     cursor: pointer;
@@ -19,7 +19,7 @@
     background-color: $purple-94;
 
     &:focus {
-      outline: 1px solid $purple-80;
+      outline: 1px solid $purple-112_50;
     }
 
     &:hover {
@@ -31,7 +31,7 @@
     background-color: $red-232;
 
     &:focus {
-      outline: 1px solid $red-193;
+      outline: 2px solid $red-232_50;
     }
 
     &:hover {

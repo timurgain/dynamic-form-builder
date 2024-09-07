@@ -10,6 +10,11 @@
 .label {
   @include set-font-size(rem(16px), 1.25);
   color: $grey-181;
+
+  &__asterisk {
+    color: $red-193;
+    margin-left: rem(5px);
+  }
 }
 
 .input {
@@ -25,8 +30,35 @@
   &::placeholder {
     color: $grey-225;
   }
+
+  &:hover:not(&_error, disabled),
+  &:focus:not(&_error, disabled) {
+    border: 1px solid $grey-181;
+    outline: 2px solid $grey-225;
+  }
+
+  &:disabled {
+    background-color: $grey-225;
+    color: $grey-181;
+  }
+
+  &_error {
+    border: 1px solid $red-193;
+    outline: 2px solid $red-232;
+  }
 }
 
-.error {
+.error-msg {
+  @include set-font-size(rem(12px), 1);
   position: absolute;
+  bottom: rem(-20px);
+  color: $red-193;
+}
+
+.icon {
+  position: absolute;
+  right: rem(calc(24px - 10px));
+  bottom: calc(rem(48px) / 2);
+  transform: translateY(50%);
+  color: $grey-181;
 }
