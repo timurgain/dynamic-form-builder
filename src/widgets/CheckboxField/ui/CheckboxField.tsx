@@ -7,7 +7,12 @@ export function CheckboxField() {
   return (
     <SectionField>
       <Input label="Set label" required />
-      <Checkbox />
+      <Checkbox
+        name={"Checkbox"}
+        error={false}
+        checked={false}
+        onChange={() => {}}
+      />
       <Button kit={ButtonKits.WARNING}>Remove field</Button>
     </SectionField>
   );

@@ -2,7 +2,7 @@
 
 .button {
   @extend %flex-row-center-center;
-  height: rem(48px);
+  height: rem(46px);
   padding: 0 rem(15px);
   @include set-font-size(rem(16px), 1.25);
   color: $white-255;

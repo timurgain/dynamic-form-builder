@@ -7,4 +7,12 @@
   justify-items: start;
   align-items: end;
   padding-bottom: rem(30px);
+
+  & > * {
+    min-width: 0; // Prevent children from growing beyond their content size
+    max-width: 100%; // Ensure children do not overflow the container
+    // overflow: hidden; // Hide overflow content
+    // text-overflow: ellipsis; // Optional: Add ellipsis for overflowing text
+    // white-space: nowrap; // Optional: Prevent text from wrapping
+  }
 }

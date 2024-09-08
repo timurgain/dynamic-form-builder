@@ -55,3 +55,18 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+%flex-col-end-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+// Text
+
+%text-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

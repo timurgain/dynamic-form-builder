@@ -66,4 +66,65 @@ $container-height: rem(76px);
   bottom: calc(rem(48px) / 2);
   transform: translateY(50%);
   color: $grey-181;
+
+  & > svg {
+    color: $grey-225;
+    transform: rotate(0);
+    transition: transform 0.3s;
+  }
+
+  &_rotate > svg {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc($container-height + rem(7px));
+  left: 0;
+  z-index: 10;
+  background-color: $white-255;
+
+  @extend %flex-col-start-start;
+  padding: rem(4px);
+  gap: rem(4px);
+  width: 100%;
+  min-height: 42px;
+  max-height: 270px;
+  overflow-y: scroll;
+  box-shadow: 0px 16px 64px -4px $grey-225;
+  border: 1px solid $grey-225;
+  border-radius: 8px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    visibility 0.3s,
+    opacity 0.3s,
+    transform 0.3s;
+
+  &_open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.option {
+  @include set-font-size(rem(16px), 1.25);
+  @extend %flex-row-center-start;
+  border-radius: rem(6px);
+  color: $grey-80;
+  padding: rem(10px);
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $grey-225;
+  }
+
+  &.selected {
+    background-color: $grey-225;
+  }
 }
