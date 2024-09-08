@@ -1,7 +1,7 @@
-import { DemoPage } from "../pages/DemoPage";
+import { DynamicFormBuilder } from "../pages/DynamicFormBuilder";
 
 function App() {
-  return <DemoPage />;
+  return <DynamicFormBuilder />;
 }
 
 export default App;
