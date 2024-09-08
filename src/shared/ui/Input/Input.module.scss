@@ -1,22 +1,26 @@
 @import "@/shared/styles/index.scss";
 
 $container-height: rem(76px);
+$label-height: rem(24px);
 
 .container {
   position: relative;
   height: $container-height;
-  @extend %flex-col-end-start;
+  @extend %flex-col-start-start;
   gap: rem(5px);
   width: 100%;
 }
 
 .label {
   @include set-font-size(rem(16px), 1.25);
+  @extend %flex-row-center-start;
   @extend %text-overflow-ellipsis;
   width: 100%;
   color: $grey-181;
+  height: $label-height;
 
   &__asterisk {
+    align-self: flex-start;
     color: $red-193;
     margin-left: rem(5px);
   }

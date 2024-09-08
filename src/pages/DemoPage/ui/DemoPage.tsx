@@ -9,9 +9,11 @@ export function DemoPage() {
     <main className={styles.main}>
       <h1>Demo</h1>
       <CreationButtons />
-      <InputField />
-      <CheckboxField />
-      <SelectField />
+      <form className={styles.form}>
+        <InputField />
+        <CheckboxField />
+        <SelectField />
+      </form>
     </main>
   );
 }

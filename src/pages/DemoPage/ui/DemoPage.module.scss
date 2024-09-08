@@ -4,6 +4,12 @@
   @extend %bp-width;
   @extend %flex-col-start-start;
   padding: rem(16px) 0 0;
-  gap: 16px;
   min-height: 100vh;
+}
+
+.form {
+  @extend %flex-col-start-start;
+  width: 100%;
+  gap: rem(20px);
+  padding: rem(30px) 0 0;
 }

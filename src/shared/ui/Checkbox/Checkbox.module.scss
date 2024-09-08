@@ -1,5 +1,31 @@
 @import "@/shared/styles/index.scss";
 
+$container-height: rem(76px);
+$label-height: rem(24px);
+
+.container {
+  position: relative;
+  height: $container-height;
+  @extend %flex-col-start-start;
+  gap: rem(5px);
+  width: 100%;
+}
+
+.label {
+  @include set-font-size(rem(16px), 1.25);
+  @extend %flex-row-center-start;
+  @extend %text-overflow-ellipsis;
+  height: $label-height;
+  width: 100%;
+  color: $grey-181;
+
+  &__asterisk {
+    align-self: flex-start;
+    color: $red-193;
+    margin-left: rem(5px);
+  }
+}
+
 .checkbox {
   @extend %flex-row-center-center;
 
@@ -18,12 +44,22 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: 0;
+    top: 0;
     // transform: translateY(-50%);
     width: 28px;
     height: 28px;
     border: 1px solid $grey-181;
     border-radius: 4px;
+  }
+
+  & input[type="checkbox"]:checked + label:after {
+    content: "✔";
+    @include set-font-size(rem(16px), 1);
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(40%);
+    color: white;
   }
 
   & input[type="checkbox"]:checked + label:before {
@@ -34,16 +70,6 @@
   & input[type="checkbox"]:hover:not(&.checkbox_error) + label:before,
   & input[type="checkbox"]:focus:not(&.checkbox_error) + label:before {
     outline: 2px solid $purple-112_50;
-  }
-
-  & input[type="checkbox"]:checked + label:after {
-    content: "✔";
-    @include set-font-size(rem(16px), 1);
-    position: absolute;
-    left: 8px;
-    bottom: 50%;
-    transform: translateY(-40%);
-    color: white;
   }
 
   &.checkbox_error > label:before {

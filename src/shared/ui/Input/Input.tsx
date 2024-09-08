@@ -48,6 +48,7 @@ export function Input({
           { [styles["input_error"]]: error },
           className,
         )}
+        name={label}
         type={type}
         value={value}
         onChange={onChange}

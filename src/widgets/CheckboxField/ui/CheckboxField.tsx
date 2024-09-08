@@ -2,16 +2,25 @@ import { Input } from "@/shared/ui/Input/Input";
 import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { SectionField } from "@/shared/ui/SectionField/SectionField";
 import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
+import { useState } from "react";
 
 export function CheckboxField() {
+  const [name, setName] = useState("");
+
   return (
     <SectionField>
-      <Input label="Set label" required />
+      <Input
+        label="Set label"
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
       <Checkbox
-        name={"Checkbox"}
-        error={false}
-        checked={false}
-        onChange={() => {}}
+        label={name}
+        // error={false}
+        // checked={false}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          console.log(name, e.target.checked);
+        }}
       />
       <Button kit={ButtonKits.WARNING}>Remove field</Button>
     </SectionField>
