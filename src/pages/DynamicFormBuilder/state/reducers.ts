@@ -1,12 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 import { ActionTypes, State, Actions } from "./types";
 
-const InitialState = {
+export const initialState = {
   fields: [],
 };
 
 export function formReducer(
-  state: State | typeof InitialState = InitialState,
+  state: State | typeof initialState,
   action: ActionTypes,
 ) {
   switch (action.type) {

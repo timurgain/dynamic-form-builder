@@ -1,7 +1,11 @@
-export type Field = "input" | "checkbox" | "select";
+export enum Fields {
+  INPUT = "input",
+  CHECKBOX = "checkbox",
+  SELECT = "select",
+}
 
 export type FieldState = {
-  type: Field;
+  type: Fields;
   id: string;
   name: string | null;
   value: string | boolean | Record<string, string | number> | null;
@@ -18,7 +22,7 @@ export enum Actions {
 export type ActionAddField = {
   type: Actions.ADD_FIELD;
   payload: {
-    type: Field;
+    type: Fields;
   };
 };
 
