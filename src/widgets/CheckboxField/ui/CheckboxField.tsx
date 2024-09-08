@@ -4,7 +4,11 @@ import { SectionField } from "@/shared/ui/SectionField/SectionField";
 import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
 import { useState } from "react";
 
-export function CheckboxField() {
+type Props = {
+  onRemoveField: () => void;
+};
+
+export function CheckboxField({ onRemoveField }: Props) {
   const [name, setName] = useState("");
 
   return (
@@ -22,7 +26,9 @@ export function CheckboxField() {
           console.log(name, e.target.checked);
         }}
       />
-      <Button kit={ButtonKits.WARNING}>Remove field</Button>
+      <Button kit={ButtonKits.WARNING} onClick={onRemoveField}>
+        Remove field
+      </Button>
     </SectionField>
   );
 }

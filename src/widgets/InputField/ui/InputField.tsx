@@ -3,7 +3,11 @@ import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { SectionField } from "@/shared/ui/SectionField/SectionField";
 import { useState } from "react";
 
-export function InputField() {
+type Props = {
+  onRemoveField: () => void;
+};
+
+export function InputField({ onRemoveField }: Props) {
   const [name, setName] = useState("");
 
   return (
@@ -19,7 +23,9 @@ export function InputField() {
           console.log(name, e.target.value);
         }}
       />
-      <Button kit={ButtonKits.WARNING}>Remove field</Button>
+      <Button kit={ButtonKits.WARNING} onClick={onRemoveField}>
+        Remove field
+      </Button>
     </SectionField>
   );
 }

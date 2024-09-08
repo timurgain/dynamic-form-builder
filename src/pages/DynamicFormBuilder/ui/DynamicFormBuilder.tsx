@@ -10,7 +10,7 @@ import { useActions } from "../state/useActions";
 
 export function DynamicFormBuilder() {
   const [state, dispatch] = useReducer(formReducer, initialState);
-  const { addField } = useActions(dispatch);
+  const { addField, removeField } = useActions(dispatch);
 
   return (
     <main className={styles.main}>
@@ -18,14 +18,25 @@ export function DynamicFormBuilder() {
       <CreationButtons onAddField={addField} />
       <form className={styles.form} onSubmit={() => {}}>
         {state.fields.map((field) => {
-          if (field.type === "input") return <InputField />;
-          if (field.type === "checkbox") return <CheckboxField />;
-          if (field.type === "select") return <SelectField />;
+          if (field.type === "input")
+            return (
+              <InputField onRemoveField={() => removeField({ id: field.id })} />
+            );
+          if (field.type === "checkbox")
+            return (
+              <CheckboxField
+                onRemoveField={() => removeField({ id: field.id })}
+              />
+            );
+          if (field.type === "select")
+            return (
+              <SelectField
+                onRemoveField={() => removeField({ id: field.id })}
+              />
+            );
         })}
-        {/* <InputField />
-        <CheckboxField />
-        <SelectField /> */}
-        <Button type="submit">Submit</Button>
+
+        {state.fields.length > 0 && <Button type="submit">Submit</Button>}
       </form>
     </main>
   );
