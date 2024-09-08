@@ -11,10 +11,10 @@ const options = [
 ];
 
 type Props = {
-  onRemoveField: () => void;
+  onRemove: () => void;
 };
 
-export function SelectField({ onRemoveField }: Props) {
+export function SelectField({ onRemove }: Props) {
   const [name, setName] = useState("");
 
   return (
@@ -29,7 +29,7 @@ export function SelectField({ onRemoveField }: Props) {
         options={options}
         onSelect={(value) => console.log(value)}
       />
-      <Button kit={ButtonKits.WARNING} onClick={onRemoveField}>
+      <Button kit={ButtonKits.WARNING} onClick={onRemove}>
         Remove field
       </Button>
     </SectionField>
