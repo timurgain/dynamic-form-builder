@@ -1,0 +1,14 @@
+@import "@/shared/styles/index.scss";
+
+.section {
+  @extend %flex-row-start-start;
+  gap: rem(30px);
+  width: 100%;
+  padding: rem(30px) 0;
+  border-bottom: 2px solid $grey-225;
+
+  @include max-1(md) {
+    flex-direction: column;
+    gap: rem(15px);
+  }
+}

@@ -2,17 +2,22 @@
 
 .section {
   display: grid;
-  grid-template-columns: 1fr 1fr 140px;
+  width: 100%;
+  grid-template-columns: 1fr 1fr auto;
   gap: rem(30px);
   justify-items: start;
   align-items: end;
   padding-bottom: rem(30px);
 
   & > * {
-    min-width: 0; // Prevent children from growing beyond their content size
-    max-width: 100%; // Ensure children do not overflow the container
-    // overflow: hidden; // Hide overflow content
-    // text-overflow: ellipsis; // Optional: Add ellipsis for overflowing text
-    // white-space: nowrap; // Optional: Prevent text from wrapping
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  @include max-1(md) {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    align-items: start;
+    gap: rem(15px);
   }
 }
