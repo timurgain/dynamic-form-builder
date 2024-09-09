@@ -8,6 +8,7 @@ import { useReducer } from "react";
 import { formReducer, initialState } from "../state/reducers";
 import { useActions } from "../state/useActions";
 import { Value } from "../state/types";
+import { Option } from "@/shared/ui/Select/Select";
 
 export function DynamicFormBuilder() {
   const [state, dispatch] = useReducer(formReducer, initialState);
@@ -58,8 +59,12 @@ export function DynamicFormBuilder() {
               <SelectField
                 key={field.id}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(name, value) => {
-                  updateField({ id: field.id, name, value });
+                onUpdate={(
+                  name: string,
+                  value: Option | null,
+                  error: boolean,
+                ) => {
+                  updateField({ id: field.id, name, value, error });
                 }}
               />
             );
