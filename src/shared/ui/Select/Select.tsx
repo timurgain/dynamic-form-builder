@@ -39,8 +39,11 @@ export function Select({
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(option?.label ?? "");
-  const [isKeyboardFocus, setIsKeyboardFocus] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState<Option[]>(options);
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | null>(
+    null,
+  );
+  const optionRefs = React.useRef<HTMLLIElement[]>([]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsOpen(true);
@@ -54,27 +57,48 @@ export function Select({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setIsKeyboardFocus(true);
     if (e.key === "Escape") setIsOpen(false);
+
+    if (e.key === "Enter") {
+      if (!isOpen) {
+        setIsOpen(true);
+        return;
+      }
+      if (focusedOptionIndex !== null && filteredOptions[focusedOptionIndex]) {
+        const option = filteredOptions[focusedOptionIndex];
+        onSelect(option);
+        setIsOpen(false);
+        setInputValue(option.label);
+        setFocusedOptionIndex(null);
+      }
+    }
+    if (e.key === "ArrowDown") {
+      setFocusedOptionIndex((prev) =>
+        prev === null || prev === filteredOptions.length - 1 ? 0 : prev + 1,
+      );
+    }
+    if (e.key === "ArrowUp") {
+      setFocusedOptionIndex((prev) =>
+        prev === null || prev === 0 ? filteredOptions.length - 1 : prev - 1,
+      );
+    }
   };
 
-  const handleMouseDown = () => {
-    if (isKeyboardFocus) setIsKeyboardFocus(false);
-  };
-
-  const handleFocus = () => {
-    if (isKeyboardFocus) setIsOpen(true);
-  };
-
-  const handleOptionClick = (option: Option) => () => {
-    // setSelectedOption(option);
-    onSelect(option);
-    setInputValue(option.label);
-    setIsOpen(false);
-  };
+  const handleOptionClick =
+    (option: Option) => (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+      e.stopPropagation();
+      onSelect(option);
+      setInputValue(option.label);
+      setIsOpen(false);
+    };
 
   return (
-    <label className={styles.container}>
+    <label
+      className={styles.container}
+      onBlur={() => setIsOpen(false)}
+      onClick={() => setIsOpen(!isOpen)}
+      onFocus={() => setIsOpen(true)}
+    >
       <span className={styles.label}>
         {label}
         {required && <sup className={styles["label__asterisk"]}>*</sup>}
@@ -94,10 +118,6 @@ export function Select({
         autoComplete="off"
         required={required}
         onKeyDown={handleKeyDown}
-        onMouseDown={handleMouseDown}
-        onClick={() => setIsOpen(!isOpen)}
-        onFocus={() => handleFocus()}
-        onBlur={() => setIsOpen(false)}
       />
       <div className={clsx(styles.icon, { [styles["icon_rotate"]]: isOpen })}>
         <ShevronIcon />
@@ -107,11 +127,16 @@ export function Select({
       <ul
         className={clsx(styles.dropdown, { [styles["dropdown_open"]]: isOpen })}
       >
-        {filteredOptions?.map((option) => (
+        {filteredOptions?.map((option, index) => (
           <li
             key={option.value}
-            className={styles.option}
+            className={clsx(styles.option, {
+              [styles["option_focused"]]: index === focusedOptionIndex,
+            })}
             onClick={handleOptionClick(option)}
+            ref={(el) => {
+              if (el) optionRefs.current.push(el);
+            }}
           >
             {option.label}
           </li>

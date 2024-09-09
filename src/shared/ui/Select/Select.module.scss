@@ -131,4 +131,8 @@ $label-height: rem(24px);
   &.selected {
     background-color: $grey-225;
   }
+
+  &_focused {
+    background-color: $grey-225;
+  }
 }
