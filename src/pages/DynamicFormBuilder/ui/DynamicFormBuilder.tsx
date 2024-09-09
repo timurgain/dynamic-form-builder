@@ -39,9 +39,11 @@ export function DynamicFormBuilder() {
               <InputField
                 key={field.id}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(name: string, value: string, error: boolean) =>
-                  updateField({ id: field.id, name, value, error })
-                }
+                onUpdate={(
+                  name: string | null,
+                  value: string | null,
+                  error: boolean,
+                ) => updateField({ id: field.id, name, value, error })}
               />
             );
           if (field.type === "checkbox")
@@ -49,7 +51,11 @@ export function DynamicFormBuilder() {
               <CheckboxField
                 key={field.id}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(name: string, value: boolean, error: boolean) => {
+                onUpdate={(
+                  name: string | null,
+                  value: boolean | null,
+                  error: boolean,
+                ) => {
                   updateField({ id: field.id, name, value, error });
                 }}
               />
@@ -60,7 +66,7 @@ export function DynamicFormBuilder() {
                 key={field.id}
                 onRemove={() => removeField({ id: field.id })}
                 onUpdate={(
-                  name: string,
+                  name: string | null,
                   value: Option | null,
                   error: boolean,
                 ) => {

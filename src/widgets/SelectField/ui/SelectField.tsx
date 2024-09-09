@@ -2,7 +2,7 @@ import { Input } from "@/shared/ui/Input/Input";
 import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { SectionField } from "@/shared/ui/SectionField/SectionField";
 import { Select, Option } from "@/shared/ui/Select/Select";
-import { useSelectField } from "../hooks/useSelectField";
+import { useFieldSet } from "@/shared/hooks/useFieldSet";
 
 const options = [
   { value: "value1", label: "Value 1" },
@@ -11,12 +11,14 @@ const options = [
 ];
 
 type Props = {
-  onUpdate: (name: string, value: Option | null, error: boolean) => void;
+  onUpdate: (name: string | null, value: Option | null, error: boolean) => void;
   onRemove: () => void;
 };
 
 export function SelectField({ onRemove, onUpdate }: Props) {
-  const { name, setName, setValue, labelError } = useSelectField({ onUpdate });
+  const { name, setName, setValue, labelError } = useFieldSet<Option>({
+    onUpdate,
+  });
 
   return (
     <SectionField>
@@ -27,7 +29,7 @@ export function SelectField({ onRemove, onUpdate }: Props) {
         error={labelError}
       />
       <Select
-        label={name}
+        label={name ?? ""}
         options={options}
         onSelect={(option) => setValue(option)}
       />

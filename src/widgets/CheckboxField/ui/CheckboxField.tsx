@@ -2,15 +2,19 @@ import { Input } from "@/shared/ui/Input/Input";
 import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { SectionField } from "@/shared/ui/SectionField/SectionField";
 import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
-import { useCheckboxField } from "../hooks/useCheckboxField";
+import { useFieldSet } from "@/shared/hooks/useFieldSet";
 
 type Props = {
-  onUpdate: (name: string, value: boolean, error: boolean) => void;
+  onUpdate: (
+    name: string | null,
+    value: boolean | null,
+    error: boolean,
+  ) => void;
   onRemove: () => void;
 };
 
 export function CheckboxField({ onRemove, onUpdate }: Props) {
-  const { name, setName, setValue, labelError } = useCheckboxField({
+  const { name, setName, setValue, labelError } = useFieldSet<boolean>({
     onUpdate,
   });
 
@@ -22,7 +26,10 @@ export function CheckboxField({ onRemove, onUpdate }: Props) {
         required
         error={labelError}
       />
-      <Checkbox label={name} onChange={(e) => setValue(e.target.checked)} />
+      <Checkbox
+        label={name ?? ""}
+        onChange={(e) => setValue(e.target.checked)}
+      />
       <Button kit={ButtonKits.WARNING} onClick={onRemove}>
         Remove field
       </Button>
