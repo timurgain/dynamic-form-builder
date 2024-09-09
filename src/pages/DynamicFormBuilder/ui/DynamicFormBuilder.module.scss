@@ -5,16 +5,34 @@
   @extend %flex-col-start-start;
   padding: rem(16px) 0 0;
   min-height: 100vh;
+
+  &__title {
+    @include set-font-size(38px, 1.25);
+    color: $black-37;
+  }
 }
 
 .form {
   @extend %flex-col-start-start;
   width: 100%;
   gap: rem(25px);
-  padding: rem(30px) 0 0;
+  padding: rem(30px) 0;
 
   @include max-1(md) {
-    padding: rem(20px) 0 0;
+    padding: rem(20px) 0;
     gap: rem(30px);
+  }
+}
+
+.result {
+  @include set-font-size(16px, 1.25);
+  color: $grey-80;
+  width: 100%;
+  padding: rem(30px) 0;
+  border-top: 2px solid $grey-225;
+
+  @include max-1(md) {
+    @include set-font-size(12px, 1.25);
+    overflow-x: scroll;
   }
 }

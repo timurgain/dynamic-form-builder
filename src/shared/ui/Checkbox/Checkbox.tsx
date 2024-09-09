@@ -2,6 +2,7 @@ import clsx from "clsx";
 import styles from "./Checkbox.module.scss";
 
 type Props = {
+  id: string;
   label: string;
   checked?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 export function Checkbox({
+  id,
   label = "checkbox",
   checked,
   onChange,
@@ -30,14 +32,14 @@ export function Checkbox({
       >
         <input
           type="checkbox"
-          id={`checkbox-${label}`}
+          id={id}
           name={label}
           required={required}
           checked={checked}
           onChange={onChange}
           disabled={disabled}
         />
-        <label htmlFor={`checkbox-${label}`}></label>
+        <label htmlFor={id}></label>
         {error && <span className={styles["error-msg"]}>{error}</span>}
       </div>
     </div>

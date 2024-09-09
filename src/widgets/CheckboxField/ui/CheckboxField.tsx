@@ -5,6 +5,7 @@ import { Checkbox } from "@/shared/ui/Checkbox/Checkbox";
 import { useFieldSet } from "@/shared/hooks/useFieldSet";
 
 type Props = {
+  id: string;
   onUpdate: (
     name: string | null,
     value: boolean | null,
@@ -13,7 +14,7 @@ type Props = {
   onRemove: () => void;
 };
 
-export function CheckboxField({ onRemove, onUpdate }: Props) {
+export function CheckboxField({ id, onRemove, onUpdate }: Props) {
   const { name, setName, setValue, labelError } = useFieldSet<boolean>({
     onUpdate,
   });
@@ -27,6 +28,7 @@ export function CheckboxField({ onRemove, onUpdate }: Props) {
         error={labelError}
       />
       <Checkbox
+        id={id}
         label={name ?? ""}
         onChange={(e) => setValue(e.target.checked)}
       />

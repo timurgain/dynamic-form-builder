@@ -30,7 +30,7 @@ export function DynamicFormBuilder() {
 
   return (
     <main className={styles.main}>
-      <h1>Demo</h1>
+      <h1 className={styles["main__title"]}>Form Builder Demo</h1>
       <CreationButtons onAddField={addField} />
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
         {state.fields.map((field) => {
@@ -50,6 +50,7 @@ export function DynamicFormBuilder() {
             return (
               <CheckboxField
                 key={field.id}
+                id={field.id}
                 onRemove={() => removeField({ id: field.id })}
                 onUpdate={(
                   name: string | null,
@@ -87,6 +88,8 @@ export function DynamicFormBuilder() {
           </Button>
         )}
       </form>
+
+      <pre className={styles.result}>{JSON.stringify(state, null, 2)}</pre>
     </main>
   );
 }
