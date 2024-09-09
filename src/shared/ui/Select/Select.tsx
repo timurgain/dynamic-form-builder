@@ -7,8 +7,8 @@ export enum SelectKits {
   DEFAULT = "default",
 }
 
-type Option = {
-  value: string;
+export type Option = {
+  value: string | number;
   label: string;
 };
 
@@ -17,7 +17,7 @@ type Props = {
   label: string;
   option?: Option;
   options: Option[];
-  onSelect: ({ key }: { [key: string]: Option }) => void;
+  onSelect: (option: Option) => void;
   placeholder?: string;
   className?: string;
   disabled?: boolean;
@@ -68,7 +68,7 @@ export function Select({
 
   const handleOptionClick = (option: Option) => () => {
     // setSelectedOption(option);
-    onSelect({ [label.replace(/\s+/g, "-")]: option });
+    onSelect(option);
     setInputValue(option.label);
     setIsOpen(false);
   };

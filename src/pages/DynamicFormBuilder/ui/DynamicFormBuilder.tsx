@@ -43,6 +43,9 @@ export function DynamicFormBuilder() {
               <SelectField
                 key={field.id}
                 onRemove={() => removeField({ id: field.id })}
+                onUpdate={(name, value) => {
+                  updateField({ id: field.id, name, value });
+                }}
               />
             );
         })}
