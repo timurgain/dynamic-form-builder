@@ -3,16 +3,14 @@ import { ActionTypes, State, Actions, FieldState } from "./types";
 export const initialState = {
   fields: [],
   isFormValid: false,
+  submittedData: null,
 };
 
 function checkFormValidity(fields: FieldState[]) {
   return fields.every((field) => !field.error && field.name);
 }
 
-export function formReducer(
-  state: State | typeof initialState,
-  action: ActionTypes,
-) {
+export function formReducer(state: State, action: ActionTypes) {
   switch (action.type) {
     case Actions.ADD_FIELD: {
       const newFields = [...state.fields, { ...action.payload }];
@@ -45,6 +43,18 @@ export function formReducer(
       return {
         ...state,
         fields: state.fields.filter((field) => field.id !== action.payload.id),
+      };
+
+    case Actions.SUBMIT_FORM:
+      return {
+        ...state,
+        submittedData: state.fields.reduce((result, field) => {
+          if (!field.name) return result;
+          return {
+            ...result,
+            [field.name]: field.value,
+          };
+        }, {}),
       };
 
     default:

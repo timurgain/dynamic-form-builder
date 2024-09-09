@@ -7,25 +7,16 @@ import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { useReducer } from "react";
 import { formReducer, initialState } from "../state/reducers";
 import { useActions } from "../state/useActions";
-import { Value } from "../state/types";
 import { Option } from "@/shared/ui/Select/Select";
 
 export function DynamicFormBuilder() {
   const [state, dispatch] = useReducer(formReducer, initialState);
-  const { addField, removeField, updateField } = useActions(dispatch);
+  const { addField, removeField, updateField, submitForm } =
+    useActions(dispatch);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const formData = state.fields.reduce(
-      (result: { [key: string]: Value }, field) => {
-        if (field.name === null) return {};
-        result[field.name] = field.value;
-        return result;
-      },
-      {},
-    );
-
-    console.log("formData", formData);
+    submitForm();
   }
 
   return (
@@ -89,7 +80,14 @@ export function DynamicFormBuilder() {
         )}
       </form>
 
-      <pre className={styles.result}>{JSON.stringify(state, null, 2)}</pre>
+      {state.submittedData && (
+        <section className={styles.result}>
+          <h2 className={styles.result__title}>Submitted Data</h2>
+          <pre className={styles.result__data}>
+            {JSON.stringify(state.submittedData, null, 2)}
+          </pre>
+        </section>
+      )}
     </main>
   );
 }

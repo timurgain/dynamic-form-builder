@@ -43,6 +43,7 @@ export function useActions(dispatch: Dispatch<ActionTypes>) {
     },
     [dispatch],
   );
+
   const removeField = useCallback(
     ({ id }: ActionRemoveField["payload"]) => {
       dispatch({
@@ -53,5 +54,12 @@ export function useActions(dispatch: Dispatch<ActionTypes>) {
     [dispatch],
   );
 
-  return { addField, updateField, removeField };
+  const submitForm = useCallback(() => {
+    dispatch({
+      type: Actions.SUBMIT_FORM,
+      payload: null,
+    });
+  }, [dispatch]);
+
+  return { addField, updateField, removeField, submitForm };
 }

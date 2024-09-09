@@ -9,6 +9,10 @@
   &__title {
     @include set-font-size(38px, 1.25);
     color: $black-37;
+
+    @include max-1(md) {
+      @include set-font-size(28px, 1.25);
+    }
   }
 }
 
@@ -25,14 +29,28 @@
 }
 
 .result {
-  @include set-font-size(16px, 1.25);
-  color: $grey-80;
+  @extend %flex-col-start-start;
+  gap: rem(25px);
   width: 100%;
   padding: rem(30px) 0;
   border-top: 2px solid $grey-225;
 
-  @include max-1(md) {
-    @include set-font-size(12px, 1.25);
-    overflow-x: scroll;
+  &__data {
+    @include set-font-size(16px, 1.25);
+    color: $grey-80;
+
+    @include max-1(md) {
+      @include set-font-size(12px, 1.25);
+      overflow-x: scroll;
+    }
+  }
+
+  &__title {
+    @include set-font-size(28px, 1.25);
+    color: $black-37;
+
+    @include max-1(md) {
+      @include set-font-size(24px, 1.25);
+    }
   }
 }

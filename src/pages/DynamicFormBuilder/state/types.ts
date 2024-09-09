@@ -16,12 +16,17 @@ export type FieldState = {
   error: boolean;
 };
 
-export type State = { fields: FieldState[]; isFormValid: boolean };
+export type State = {
+  fields: FieldState[];
+  isFormValid: boolean;
+  submittedData: null | Record<string, Value>;
+};
 
 export enum Actions {
   ADD_FIELD = "ADD_FIELD",
   UPDATE_FIELD = "UPDATE_FIELD",
   REMOVE_FIELD = "REMOVE_FIELD",
+  SUBMIT_FORM = "SUBMIT_FORM",
 }
 
 export type ActionAddField = {
@@ -52,7 +57,13 @@ export type ActionRemoveField = {
   };
 };
 
+export type ActionSubmitForm = {
+  type: Actions.SUBMIT_FORM;
+  payload: null;
+};
+
 export type ActionTypes =
   | ActionAddField
   | ActionRemoveField
-  | ActionUpdateField;
+  | ActionUpdateField
+  | ActionSubmitForm;
