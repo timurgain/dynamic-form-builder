@@ -20,7 +20,7 @@ type Props = {
   className?: string;
   disabled?: boolean;
   required?: boolean;
-  error?: string;
+  error?: null | boolean | string;
 };
 
 export function Input({

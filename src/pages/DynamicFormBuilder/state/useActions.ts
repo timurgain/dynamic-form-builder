@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 import {
   ActionAddField,
   ActionRemoveField,
@@ -16,7 +18,11 @@ export function useActions(dispatch: Dispatch<ActionTypes>) {
       dispatch({
         type: Actions.ADD_FIELD,
         payload: {
+          id: uuidv4(),
           type: fieldType,
+          name: null,
+          value: null,
+          error: false,
         },
       });
     },
@@ -24,10 +30,15 @@ export function useActions(dispatch: Dispatch<ActionTypes>) {
   );
 
   const updateField = useCallback(
-    ({ id, name, value }: ActionUpdateField["payload"]) => {
+    ({ id, name, value, error }: ActionUpdateField["payload"]) => {
       dispatch({
         type: Actions.UPDATE_FIELD,
-        payload: { id, name, value },
+        payload: {
+          id,
+          name: name ? name.replace(/\s+/g, "-") : name,
+          value,
+          error,
+        },
       });
     },
     [dispatch],

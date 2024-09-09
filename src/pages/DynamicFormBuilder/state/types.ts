@@ -1,17 +1,22 @@
+import { Option } from "@/shared/ui/Select/Select";
+
 export enum Fields {
   INPUT = "input",
   CHECKBOX = "checkbox",
   SELECT = "select",
 }
 
+export type Value = string | boolean | Option | null;
+
 export type FieldState = {
   type: Fields;
   id: string;
   name: string | null;
-  value: string | boolean | Record<string, string | number> | null;
+  value: Value;
+  error: boolean;
 };
 
-export type State = { fields: FieldState[] };
+export type State = { fields: FieldState[]; isFormValid: boolean };
 
 export enum Actions {
   ADD_FIELD = "ADD_FIELD",
@@ -22,7 +27,11 @@ export enum Actions {
 export type ActionAddField = {
   type: Actions.ADD_FIELD;
   payload: {
+    id: string;
     type: Fields;
+    name: null;
+    value: null;
+    error: boolean;
   };
 };
 
@@ -31,7 +40,8 @@ export type ActionUpdateField = {
   payload: {
     id: string;
     name: string | null;
-    value: string | boolean | Record<string, string | number> | null;
+    value: Value;
+    error: boolean;
   };
 };
 

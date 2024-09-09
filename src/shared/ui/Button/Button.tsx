@@ -8,24 +8,30 @@ export enum ButtonKits {
 
 type Props = {
   kit?: ButtonKits;
-  type?: "button" | "submit" | "reset";
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
+  style?: React.CSSProperties;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
 };
 
 export function Button({
-  onClick,
   kit = ButtonKits.DEFAULT,
-  type = "button",
   className,
+  style,
+  type = "button",
+  disabled = false,
+  onClick,
   children,
 }: Props) {
   return (
     <button
+      className={clsx(styles.button, styles[`button_kit_${kit}`], className)}
+      style={style}
       type={type}
       onClick={onClick}
-      className={clsx(styles.button, styles[`button_kit_${kit}`], className)}
+      disabled={disabled}
     >
       {children}
     </button>
