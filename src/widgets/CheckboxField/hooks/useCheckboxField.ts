@@ -2,16 +2,16 @@ import { TEXT_REQUIRED } from "@/shared/constants/validation";
 import { useEffect, useState } from "react";
 
 type Props = {
-  onUpdate: (name: string, value: string, error: boolean) => void;
+  onUpdate: (name: string, value: boolean, error: boolean) => void;
 };
 
-export function useInputField({ onUpdate }: Props) {
+export function useCheckboxField({ onUpdate }: Props) {
   const [name, setName] = useState("");
-  const [value, setValue] = useState<null | string>(null);
+  const [value, setValue] = useState<null | boolean>(null);
   const [labelError, setLabelError] = useState<null | string>(null);
 
   useEffect(() => {
-    onUpdate(name, value ?? "", !!labelError);
+    onUpdate(name, !!value, !!labelError);
     if (
       (!name.length && value === null) ||
       (name.length >= TEXT_REQUIRED.minLength.value &&
