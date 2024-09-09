@@ -6,24 +6,28 @@ import { useState } from "react";
 
 type Props = {
   onRemove: () => void;
+  onUpdate: (name: string, value: boolean) => void;
 };
 
-export function CheckboxField({ onRemove }: Props) {
-  const [name, setName] = useState("");
+export function CheckboxField({ onRemove, onUpdate }: Props) {
+  const [name, setName] = useState<string>("");
+  const [value, setValue] = useState<boolean>(false);
 
   return (
     <SectionField>
       <Input
         label="Set label"
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => {
+          setName(e.target.value);
+          onUpdate(e.target.value, value);
+        }}
         required
       />
       <Checkbox
         label={name}
-        // error={false}
-        // checked={false}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          console.log(name, e.target.checked);
+        onChange={(e) => {
+          setValue(e.target.checked);
+          onUpdate(name, e.target.checked);
         }}
       />
       <Button kit={ButtonKits.WARNING} onClick={onRemove}>

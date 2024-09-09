@@ -69,7 +69,7 @@ $label-height: rem(24px);
 
   & input[type="checkbox"]:hover:not(&.checkbox_error) + label:before,
   & input[type="checkbox"]:focus:not(&.checkbox_error) + label:before {
-    outline: 2px solid $purple-112_50;
+    outline: 2px solid $grey-225;
   }
 
   &.checkbox_error > label:before {

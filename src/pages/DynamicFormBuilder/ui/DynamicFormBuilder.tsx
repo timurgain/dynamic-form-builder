@@ -33,6 +33,9 @@ export function DynamicFormBuilder() {
               <CheckboxField
                 key={field.id}
                 onRemove={() => removeField({ id: field.id })}
+                onUpdate={(name: string, value: boolean) => {
+                  updateField({ id: field.id, name, value });
+                }}
               />
             );
           if (field.type === "select")
