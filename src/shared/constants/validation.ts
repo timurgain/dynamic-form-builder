@@ -11,4 +11,8 @@ export const TEXT_REQUIRED = {
     value: 50,
     message: "Max input length is 50",
   },
+  unique: {
+    value: true,
+    message: "Label must be unique",
+  },
 };

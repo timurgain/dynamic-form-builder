@@ -1,4 +1,4 @@
-import { Fields, FieldState, Value } from "@/shared/types";
+import { FieldState, Value } from "@/shared/types";
 
 export type State = {
   fields: FieldState[];
@@ -15,30 +15,17 @@ export enum Actions {
 
 export type ActionAddField = {
   type: Actions.ADD_FIELD;
-  payload: {
-    id: string;
-    type: Fields;
-    name: null;
-    value: null;
-    error: boolean;
-  };
+  payload: FieldState;
 };
 
 export type ActionUpdateField = {
   type: Actions.UPDATE_FIELD;
-  payload: {
-    id: string;
-    name: string | null;
-    value: Value;
-    error: boolean;
-  };
+  payload: Omit<FieldState, "type">;
 };
 
 export type ActionRemoveField = {
   type: Actions.REMOVE_FIELD;
-  payload: {
-    id: string;
-  };
+  payload: { id: FieldState["id"] };
 };
 
 export type ActionSubmitForm = {

@@ -1,14 +1,11 @@
-import { ActionTypes, State, Actions, FieldState } from "./types";
+import { ActionTypes, State, Actions } from "./types";
+import { checkFieldValidity, checkFormValidity } from "./utils";
 
 export const initialState = {
   fields: [],
   isFormValid: false,
   submittedData: null,
 };
-
-function checkFormValidity(fields: FieldState[]) {
-  return fields.every((field) => !field.error && field.name);
-}
 
 export function formReducer(state: State, action: ActionTypes) {
   switch (action.type) {
@@ -28,7 +25,7 @@ export function formReducer(state: State, action: ActionTypes) {
               ...field,
               name: action.payload.name,
               value: action.payload.value,
-              error: action.payload.error,
+              error: checkFieldValidity(action.payload, state.fields),
             }
           : field,
       );

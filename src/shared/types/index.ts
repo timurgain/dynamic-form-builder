@@ -16,5 +16,5 @@ export type FieldState = {
   id: string;
   name: string | null;
   value: Value;
-  error: boolean;
+  error: null | string;
 };

@@ -22,7 +22,7 @@ export function useActions(dispatch: Dispatch<ActionTypes>) {
           type: fieldType,
           name: null,
           value: null,
-          error: false,
+          error: null,
         },
       });
     },

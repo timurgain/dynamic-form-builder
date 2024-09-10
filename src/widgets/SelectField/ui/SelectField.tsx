@@ -12,7 +12,11 @@ const options = [
 
 type Props = {
   field: FieldState;
-  onUpdate: (name: string | null, value: Value, error: boolean) => void;
+  onUpdate: (
+    name: string | null,
+    value: Value,
+    error: FieldState["error"],
+  ) => void;
   onRemove: () => void;
 };
 
