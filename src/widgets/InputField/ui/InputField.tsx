@@ -1,27 +1,29 @@
 import { Input } from "@/shared/ui/Input/Input";
 import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { SectionField } from "@/shared/ui/SectionField/SectionField";
-import { useFieldSet } from "@/shared/hooks/useFieldSet";
+import { FieldState, Value } from "@/shared/types";
 
 type Props = {
-  onUpdate: (name: string | null, value: string | null, error: boolean) => void;
+  field: FieldState;
+  onUpdate: (name: string | null, value: Value, error: boolean) => void;
   onRemove: () => void;
 };
 
-export function InputField({ onUpdate, onRemove }: Props) {
-  const { name, setName, setValue, labelError } = useFieldSet<string>({
-    onUpdate,
-  });
+export function InputField({ field, onUpdate, onRemove }: Props) {
+  const { name, value, error } = field;
 
   return (
     <SectionField>
       <Input
         label="Set label"
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => onUpdate(e.target.value, value, error)}
         required
-        error={labelError}
+        error={error}
       />
-      <Input label={name ?? ""} onChange={(e) => setValue(e.target.value)} />
+      <Input
+        label={name ?? ""}
+        onChange={(e) => onUpdate(name, e.target.value, error)}
+      />
       <Button kit={ButtonKits.WARNING} onClick={onRemove}>
         Remove field
       </Button>

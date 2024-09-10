@@ -14,7 +14,7 @@ type Props = {
 
 export function Checkbox({
   id,
-  label = "checkbox",
+  label,
   checked,
   onChange,
   disabled = false,

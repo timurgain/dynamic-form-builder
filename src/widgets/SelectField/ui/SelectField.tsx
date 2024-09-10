@@ -1,8 +1,8 @@
 import { Input } from "@/shared/ui/Input/Input";
 import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { SectionField } from "@/shared/ui/SectionField/SectionField";
-import { Select, Option } from "@/shared/ui/Select/Select";
-import { useFieldSet } from "@/shared/hooks/useFieldSet";
+import { Select } from "@/shared/ui/Select/Select";
+import { FieldState, Value } from "@/shared/types";
 
 const options = [
   { value: "value1", label: "Value 1" },
@@ -11,27 +11,26 @@ const options = [
 ];
 
 type Props = {
-  onUpdate: (name: string | null, value: Option | null, error: boolean) => void;
+  field: FieldState;
+  onUpdate: (name: string | null, value: Value, error: boolean) => void;
   onRemove: () => void;
 };
 
-export function SelectField({ onRemove, onUpdate }: Props) {
-  const { name, setName, setValue, labelError } = useFieldSet<Option>({
-    onUpdate,
-  });
+export function SelectField({ field, onUpdate, onRemove }: Props) {
+  const { name, value, error } = field;
 
   return (
     <SectionField>
       <Input
         label="Set label"
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => onUpdate(e.target.value, value, error)}
         required
-        error={labelError}
+        error={error}
       />
       <Select
         label={name ?? ""}
         options={options}
-        onSelect={(option) => setValue(option)}
+        onSelect={(option) => onUpdate(name, option, error)}
       />
       <Button kit={ButtonKits.WARNING} onClick={onRemove}>
         Remove field

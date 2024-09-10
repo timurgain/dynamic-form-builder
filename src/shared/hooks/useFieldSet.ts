@@ -1,17 +1,21 @@
 import { TEXT_REQUIRED } from "@/shared/constants/validation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { FieldState, Value } from "../types";
 
-type Props<T> = {
-  onUpdate: (name: string | null, value: T | null, error: boolean) => void;
+type Props = {
+  field: FieldState;
+  onUpdate: (name: string | null, value: Value, error: boolean) => void;
 };
 
-export function useFieldSet<T>({ onUpdate }: Props<T>) {
-  const [name, setName] = useState<null | string>(null);
-  const [value, setValue] = useState<null | T>(null);
-  const [labelError, setLabelError] = useState<null | string>(null);
+export function useFieldSet({ field, onUpdate }: Props) {
+  // const [name, setName] = useState<null | string>(null);
+  // const [value, setValue] = useState<null | T>(null);
+  // const [labelError, setLabelError] = useState<null | string>(null);
+
+  const { name, value, error } = field;
 
   useEffect(() => {
-    onUpdate(name, value, !!labelError);
+    onUpdate(name, value, error);
     if (
       (name === null && value === null) ||
       (name &&

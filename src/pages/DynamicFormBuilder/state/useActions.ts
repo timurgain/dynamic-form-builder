@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
 import {
-  ActionAddField,
   ActionRemoveField,
   Actions,
   ActionTypes,
@@ -11,10 +10,11 @@ import {
 import { useCallback } from "react";
 
 import { Dispatch } from "react";
+import { Fields } from "@/shared/types";
 
 export function useActions(dispatch: Dispatch<ActionTypes>) {
   const addField = useCallback(
-    ({ type: fieldType }: ActionAddField["payload"]) => {
+    ({ type: fieldType }: { type: Fields }) => {
       dispatch({
         type: Actions.ADD_FIELD,
         payload: {

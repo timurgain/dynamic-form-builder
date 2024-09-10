@@ -1,16 +1,12 @@
 import styles from "./Select.module.scss";
 import clsx from "clsx";
 import ShevronIcon from "@/shared/assets/icons/chevron.svg?react";
+import type { Option } from "@/shared/types";
 import React, { useState } from "react";
 
 export enum SelectKits {
   DEFAULT = "default",
 }
-
-export type Option = {
-  value: string | number;
-  label: string;
-};
 
 type Props = {
   kit?: SelectKits;

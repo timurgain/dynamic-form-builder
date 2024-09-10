@@ -7,7 +7,7 @@ import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { useReducer } from "react";
 import { formReducer, initialState } from "../state/reducers";
 import { useActions } from "../state/useActions";
-import { Option } from "@/shared/ui/Select/Select";
+import type { Value } from "@/shared/types";
 
 export function DynamicFormBuilder() {
   const [state, dispatch] = useReducer(formReducer, initialState);
@@ -29,23 +29,22 @@ export function DynamicFormBuilder() {
             return (
               <InputField
                 key={field.id}
+                field={field}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(
-                  name: string | null,
-                  value: string | null,
-                  error: boolean,
-                ) => updateField({ id: field.id, name, value, error })}
+                onUpdate={(name: string | null, value: Value, error: boolean) =>
+                  updateField({ id: field.id, name, value, error })
+                }
               />
             );
           if (field.type === "checkbox")
             return (
               <CheckboxField
                 key={field.id}
-                id={field.id}
+                field={field}
                 onRemove={() => removeField({ id: field.id })}
                 onUpdate={(
                   name: string | null,
-                  value: boolean | null,
+                  value: Value,
                   error: boolean,
                 ) => {
                   updateField({ id: field.id, name, value, error });
@@ -56,14 +55,11 @@ export function DynamicFormBuilder() {
             return (
               <SelectField
                 key={field.id}
+                field={field}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(
-                  name: string | null,
-                  value: Option | null,
-                  error: boolean,
-                ) => {
-                  updateField({ id: field.id, name, value, error });
-                }}
+                onUpdate={(name: string | null, value: Value, error: boolean) =>
+                  updateField({ id: field.id, name, value, error })
+                }
               />
             );
         })}

@@ -1,20 +1,4 @@
-import { Option } from "@/shared/ui/Select/Select";
-
-export enum Fields {
-  INPUT = "input",
-  CHECKBOX = "checkbox",
-  SELECT = "select",
-}
-
-export type Value = string | boolean | Option | null;
-
-export type FieldState = {
-  type: Fields;
-  id: string;
-  name: string | null;
-  value: Value;
-  error: boolean;
-};
+import { Fields, FieldState, Value } from "@/shared/types";
 
 export type State = {
   fields: FieldState[];
