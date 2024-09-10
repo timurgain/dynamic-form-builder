@@ -26,6 +26,7 @@ export function InputField({ field, onUpdate, onRemove }: Props) {
       />
       <Input
         label={name ?? ""}
+        value={value?.toString() ?? ""}
         onChange={(e) => onUpdate(name, e.target.value, error)}
       />
       <Button kit={ButtonKits.WARNING} onClick={onRemove}>

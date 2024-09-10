@@ -61,5 +61,12 @@ export function useActions(dispatch: Dispatch<ActionTypes>) {
     });
   }, [dispatch]);
 
-  return { addField, updateField, removeField, submitForm };
+  const clearForm = useCallback(() => {
+    dispatch({
+      type: Actions.CLEAR_FORM,
+      payload: null,
+    });
+  }, [dispatch]);
+
+  return { addField, updateField, removeField, submitForm, clearForm };
 }

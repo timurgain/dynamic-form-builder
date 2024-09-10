@@ -2,7 +2,7 @@ import { Input } from "@/shared/ui/Input/Input";
 import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { SectionField } from "@/shared/ui/SectionField/SectionField";
 import { Select } from "@/shared/ui/Select/Select";
-import { FieldState, Value } from "@/shared/types";
+import { FieldState, Value, Option } from "@/shared/types";
 
 const options = [
   { value: "value1", label: "Value 1" },
@@ -33,6 +33,7 @@ export function SelectField({ field, onUpdate, onRemove }: Props) {
       />
       <Select
         label={name ?? ""}
+        option={value as Option}
         options={options}
         onSelect={(option) => onUpdate(name, option, error)}
       />

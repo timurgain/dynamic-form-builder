@@ -10,12 +10,13 @@ import { useActions } from "../state/useActions";
 
 export function DynamicFormBuilder() {
   const [state, dispatch] = useReducer(formReducer, initialState);
-  const { addField, removeField, updateField, submitForm } =
+  const { addField, removeField, updateField, submitForm, clearForm } =
     useActions(dispatch);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     submitForm();
+    clearForm();
   }
 
   return (

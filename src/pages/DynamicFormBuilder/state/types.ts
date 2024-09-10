@@ -11,6 +11,7 @@ export enum Actions {
   UPDATE_FIELD = "UPDATE_FIELD",
   REMOVE_FIELD = "REMOVE_FIELD",
   SUBMIT_FORM = "SUBMIT_FORM",
+  CLEAR_FORM = "CLEAR_FORM",
 }
 
 export type ActionAddField = {
@@ -33,8 +34,14 @@ export type ActionSubmitForm = {
   payload: null;
 };
 
+export type ActionClearForm = {
+  type: Actions.CLEAR_FORM;
+  payload: null;
+};
+
 export type ActionTypes =
   | ActionAddField
   | ActionRemoveField
   | ActionUpdateField
-  | ActionSubmitForm;
+  | ActionSubmitForm
+  | ActionClearForm;

@@ -28,6 +28,7 @@ export function CheckboxField({ field, onRemove, onUpdate }: Props) {
       <Checkbox
         id={field.id}
         label={name ?? ""}
+        checked={!!value}
         onChange={(e) => onUpdate(name, e.target.checked, error)}
       />
       <Button kit={ButtonKits.WARNING} onClick={onRemove}>

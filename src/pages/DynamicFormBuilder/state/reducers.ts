@@ -54,6 +54,19 @@ export function formReducer(state: State, action: ActionTypes) {
         }, {}),
       };
 
+    case Actions.CLEAR_FORM:
+      return {
+        ...state,
+        fields: state.fields.map((field) => {
+          return {
+            ...field,
+            value: null,
+            error: null,
+          };
+        }),
+        isFormValid: false,
+      };
+
     default:
       return state;
   }
