@@ -40,6 +40,7 @@ export function Select({
     null,
   );
   const optionRefs = React.useRef<HTMLLIElement[]>([]);
+  const containerRef = React.useRef<HTMLLabelElement>(null);
 
   useEffect(() => {
     if (option === null) setInputValue("");
@@ -93,13 +94,21 @@ export function Select({
       setIsOpen(false);
     };
 
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <label
-      className={styles.container}
-      onBlur={() => setIsOpen(false)}
-      onClick={() => setIsOpen(!isOpen)}
-      onFocus={() => setIsOpen(true)}
-    >
+    <label className={styles.container} ref={containerRef}>
       <span className={styles.label}>
         {label}
         {required && <sup className={styles["label__asterisk"]}>*</sup>}
@@ -119,6 +128,9 @@ export function Select({
         autoComplete="off"
         required={required}
         onKeyDown={handleKeyDown}
+        onMouseDown={() => setIsOpen(!isOpen)}
+        onFocus={() => setIsOpen(true)}
+        onBlur={() => setIsOpen(false)}
       />
       <div className={clsx(styles.icon, { [styles["icon_rotate"]]: isOpen })}>
         <ShevronIcon />
