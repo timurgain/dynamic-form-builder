@@ -37,7 +37,11 @@
 
   &__data {
     @include set-font-size(16px, 1.25);
-    color: $grey-80;
+    color: $green-0;
+    padding: rem(10px);
+    background-color: $green-0_07;
+    border-radius: 4px;
+    width: 100%;
 
     @include max-1(md) {
       @include set-font-size(12px, 1.25);

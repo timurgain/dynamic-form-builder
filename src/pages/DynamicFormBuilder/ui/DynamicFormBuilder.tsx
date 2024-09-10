@@ -7,7 +7,6 @@ import { Button, ButtonKits } from "@/shared/ui/Button/Button";
 import { useReducer } from "react";
 import { formReducer, initialState } from "../state/reducers";
 import { useActions } from "../state/useActions";
-import type { Value } from "@/shared/types";
 
 export function DynamicFormBuilder() {
   const [state, dispatch] = useReducer(formReducer, initialState);
@@ -31,7 +30,7 @@ export function DynamicFormBuilder() {
                 key={field.id}
                 field={field}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(name: string | null, value: Value, error: boolean) =>
+                onUpdate={(name, value, error) =>
                   updateField({ id: field.id, name, value, error })
                 }
               />
@@ -42,11 +41,7 @@ export function DynamicFormBuilder() {
                 key={field.id}
                 field={field}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(
-                  name: string | null,
-                  value: Value,
-                  error: boolean,
-                ) => {
+                onUpdate={(name, value, error) => {
                   updateField({ id: field.id, name, value, error });
                 }}
               />
@@ -57,7 +52,7 @@ export function DynamicFormBuilder() {
                 key={field.id}
                 field={field}
                 onRemove={() => removeField({ id: field.id })}
-                onUpdate={(name: string | null, value: Value, error: boolean) =>
+                onUpdate={(name, value, error) =>
                   updateField({ id: field.id, name, value, error })
                 }
               />
